@@ -1,0 +1,17 @@
+
+- name: add gateway group
+  group:
+    name: gateway
+  become: true
+  tags:
+    system-accounts
+
+- name: add gateway user
+  user:
+    name: gateway
+    comment: Gateway User
+    group: gateway
+  become: true
+  tags:
+    system-accounts
+

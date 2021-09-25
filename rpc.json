@@ -1,0 +1,83 @@
+{
+  "gateway": {
+    "assetdata": {
+      "description": "RPC to fetch all data by chain account and chain asset.",
+      "params": [
+        {
+          "name": "account",
+          "type": "String"
+        },
+        {
+          "name": "asset",
+          "type": "String"
+        },
+        {
+          "name": "at",
+          "type": "BlockHash",
+          "isOptional": true
+        }
+      ],
+      "type": "ApiAssetData"
+    },
+    "cashdata": {
+      "description": "RPC to fetch cash data for chain account.",
+      "params": [
+        {
+          "name": "account",
+          "type": "String"
+        },
+        {
+          "name": "at",
+          "type": "BlockHash",
+          "isOptional": true
+        }
+      ],
+      "type": "ApiCashData"
+    },
+    "rates": {
+      "description": "RPC to fetch borrow and supply rates by chain asset.",
+      "params": [
+        {
+          "name": "asset",
+          "type": "String"
+        },
+        {
+          "name": "at",
+          "type": "BlockHash",
+          "isOptional": true
+        }
+      ],
+      "type": "ApiRates"
+    },
+    "liquidity": {
+      "description": "RPC to fetch an account's liquidity.",
+      "params": [
+        {
+          "name": "account",
+          "type": "String"
+        },
+        {
+          "name": "at",
+          "type": "BlockHash",
+          "isOptional": true
+        }
+      ],
+      "type": "String"
+    },
+    "price": {
+      "description": "RPC to current price for a given ticker.",
+      "params": [
+        {
+          "name": "ticker",
+          "type": "String"
+        },
+        {
+          "name": "at",
+          "type": "BlockHash",
+          "isOptional": true
+        }
+      ],
+      "type": "String"
+    }
+  }
+}

@@ -1,0 +1,660 @@
+{
+  "AccountData": "()",
+  "APR": "Uint",
+  "AccountId32": "[u8;32]",
+  "Address": "MultiAddress",
+  "ApiAPR": "u64",
+  "ApiAssetData": {
+    "asset": "String",
+    "balance": "String",
+    "total_supply": "String",
+    "total_borrow": "String",
+    "supply_rate": "String",
+    "borrow_rate": "String",
+    "liquidity_factor": "String",
+    "price": "String"
+  },
+  "ApiAssetInfo": {
+    "asset": "ChainAsset",
+    "decimals": "u8",
+    "liquidity_factor": "String",
+    "rate_model": "ApiInterestRateModel",
+    "miner_shares": "String",
+    "supply_cap": "String",
+    "symbol": "Symbol",
+    "ticker": "String"
+  },
+  "ApiAssetMeta": {
+    "supplier_counts": "BTreeMap<String,u32>",
+    "borrower_counts": "BTreeMap<String,u32>",
+    "combined_supplier_count": "u32",
+    "combined_borrower_count": "u32"
+  },
+  "ApiCashData": {
+    "balance": "String",
+    "cash_yield": "String",
+    "price": "String",
+    "cash_principal": "String",
+    "cash_index": "String",
+    "total_cash": "String"
+  },
+  "ApiInterestRateModel": {
+    "_enum": {
+      "Kink": "ApiInterestRateModelKink",
+      "Fixed": "ApiInterestRateModelFixed"
+    }
+  },
+  "ApiInterestRateModelFixed": {
+    "rate": "String"
+  },
+  "ApiInterestRateModelKink": {
+    "zero_rate": "String",
+    "kink_rate": "String",
+    "kink_utilization": "String",
+    "full_rate": "String"
+  },
+  "ApiPortfolio": {
+    "cash": "String",
+    "positions": "Vec<(ChainAsset,String)>"
+  },
+  "ApiRates": "(ApiAPR,ApiAPR)",
+  "ApiValidators": {
+    "current_block": "String",
+    "current_validators": "Vec<(String,String)>",
+    "miner_payouts": "Vec<(ChainAccount,String)>"
+  },
+  "AssetAmount": "Uint",
+  "AssetBalance": "Int",
+  "AssetIndex": "Uint",
+  "AssetInfo": {
+    "asset": "ChainAsset",
+    "decimals": "Decimals",
+    "liquidity_factor": "LiquidityFactor",
+    "rate_model": "InterestRateModel",
+    "miner_shares": "MinerShares",
+    "supply_cap": "AssetAmount",
+    "symbol": "Symbol",
+    "ticker": "Ticker"
+  },
+  "AssetPrice": "u128",
+  "AssetQuantity": "Quantity",
+  "Authorities": "Vec<AccountId32>",
+  "Balance": {
+    "value": "AssetBalance",
+    "units": "Units"
+  },
+  "Bips": "u128",
+  "BlockLength": {
+    "max": "PerDispatchClass_u32"
+  },
+  "CashAmount": "Uint",
+  "CashExtractionNotice": {
+    "_enum": {
+      "Eth": "CashExtractionNoticeEth",
+      "Matic": "CashExtractionNoticeMatic"
+    }
+  },
+  "CashExtractionNoticeEth": {
+    "id": "NoticeId",
+    "parent": "Ethereum__Chain__Hash",
+    "account": "Ethereum__Chain__Address",
+    "principal": "Ethereum__Chain__Amount"
+  },
+  "CashExtractionNoticeMatic": {
+    "id": "NoticeId",
+    "parent": "Polygon__Chain__Hash",
+    "account": "Polygon__Chain__Address",
+    "principal": "Polygon__Chain__Amount"
+  },
+  "CashIndex": "Uint",
+  "CashOrChainAsset": {
+    "_enum": {
+      "Cash": "",
+      "ChainAsset": "ChainAsset"
+    }
+  },
+  "CashPerCashPrincipal": "CashIndex",
+  "CashPrincipal": "AssetBalance",
+  "CashPrincipalAmount": "AssetAmount",
+  "CashPrincipalPerAsset": "AssetIndex",
+  "CashQuantity": "Quantity",
+  "ChainAccount": {
+    "_enum": {
+      "Gate": "Gateway__Chain__Address",
+      "Eth": "Ethereum__Chain__Address",
+      "Dot": "Polkadot__Chain__Address",
+      "Matic": "Polygon__Chain__Address"
+    }
+  },
+  "ChainAccountSignature": {
+    "_enum": {
+      "Gate": "ChainAccountSignatureGate",
+      "Eth": "ChainAccountSignatureEth",
+      "Dot": "ChainAccountSignatureDot",
+      "Matic": "ChainAccountSignatureMatic"
+    }
+  },
+  "ChainAccountSignatureDot": "(Polkadot__Chain__Address,Polkadot__Chain__Signature)",
+  "ChainAccountSignatureEth": "(Ethereum__Chain__Address,Ethereum__Chain__Signature)",
+  "ChainAccountSignatureGate": "(Gateway__Chain__Address,Gateway__Chain__Signature)",
+  "ChainAccountSignatureMatic": "(Polygon__Chain__Address,Polygon__Chain__Signature)",
+  "ChainAsset": {
+    "_enum": {
+      "Gate": "Reserved",
+      "Eth": "Ethereum__Chain__Address",
+      "Dot": "Reserved",
+      "Matic": "Polygon__Chain__Address"
+    }
+  },
+  "ChainBlock": {
+    "_enum": {
+      "Eth": "Ethereum__Chain__Block",
+      "Matic": "Polygon__Chain__Block"
+    }
+  },
+  "ChainBlockEvent": {
+    "_enum": {
+      "Reserved": "",
+      "Eth": "ChainBlockEventEth",
+      "Matic": "ChainBlockEventMatic"
+    }
+  },
+  "ChainBlockEventEth": "(ChainBlockNumber,Ethereum__Chain__Event)",
+  "ChainBlockEventMatic": "(ChainBlockNumber,Polygon__Chain__Event)",
+  "ChainBlockEvents": {
+    "_enum": {
+      "Reserved": "",
+      "Eth": "Vec<(ChainBlockNumber,Ethereum__Chain__Event)>",
+      "Matic": "Vec<(ChainBlockNumber,Polygon__Chain__Event)>"
+    }
+  },
+  "ChainBlockNumber": "u64",
+  "ChainBlockTally": {
+    "block": "ChainBlock",
+    "support": "SignersSet",
+    "dissent": "SignersSet"
+  },
+  "ChainBlocks": {
+    "_enum": {
+      "Eth": "Vec<Ethereum__Chain__Block>",
+      "Matic": "Vec<Polygon__Chain__Block>"
+    }
+  },
+  "ChainHash": {
+    "_enum": {
+      "Gate": "Gateway__Chain__Hash",
+      "Eth": "Ethereum__Chain__Hash",
+      "Dot": "Polkadot__Chain__Hash",
+      "Matic": "Polygon__Chain__Hash"
+    }
+  },
+  "ChainId": {
+    "_enum": {
+      "Gate": "",
+      "Eth": "",
+      "Dot": "",
+      "Matic": ""
+    }
+  },
+  "ChainReorg": {
+    "_enum": {
+      "Eth": "ChainReorgEth",
+      "Matic": "ChainReorgMatic"
+    }
+  },
+  "ChainReorgEth": {
+    "from_hash": "Ethereum__Chain__Hash",
+    "to_hash": "Ethereum__Chain__Hash",
+    "reverse_blocks": "Vec<Ethereum__Chain__Block>",
+    "forward_blocks": "Vec<Ethereum__Chain__Block>"
+  },
+  "ChainReorgMatic": {
+    "from_hash": "Polygon__Chain__Hash",
+    "to_hash": "Polygon__Chain__Hash",
+    "reverse_blocks": "Vec<Polygon__Chain__Block>",
+    "forward_blocks": "Vec<Polygon__Chain__Block>"
+  },
+  "ChainReorgTally": {
+    "reorg": "ChainReorg",
+    "support": "SignersSet"
+  },
+  "ChainSignature": {
+    "_enum": {
+      "Gate": "Gateway__Chain__Signature",
+      "Eth": "Ethereum__Chain__Signature",
+      "Dot": "Polkadot__Chain__Signature",
+      "Matic": "Polygon__Chain__Signature"
+    }
+  },
+  "ChainSignatureList": {
+    "_enum": {
+      "Gate": "Reserved",
+      "Eth": "Vec<(Ethereum__Chain__Address,Ethereum__Chain__Signature)>",
+      "Dot": "Vec<(Polkadot__Chain__Address,Polkadot__Chain__Signature)>",
+      "Matic": "Vec<(Polygon__Chain__Address,Polygon__Chain__Signature)>"
+    }
+  },
+  "ChainStarport": "ChainAccount",
+  "ChangeAuthorityNotice": {
+    "_enum": {
+      "Eth": "ChangeAuthorityNoticeEth",
+      "Matic": "ChangeAuthorityNoticeMatic"
+    }
+  },
+  "ChangeAuthorityNoticeEth": {
+    "id": "NoticeId",
+    "parent": "Ethereum__Chain__Hash",
+    "new_authorities": "Vec<Ethereum__Chain__Address>"
+  },
+  "ChangeAuthorityNoticeMatic": {
+    "id": "NoticeId",
+    "parent": "Polygon__Chain__Hash",
+    "new_authorities": "Vec<Polygon__Chain__Address>"
+  },
+  "CodeHash": "Ethereum__Chain__Hash",
+  "CryptoError": {
+    "_enum": {
+      "Unknown": "",
+      "KeyNotFound": "",
+      "KeyringLock": "",
+      "InvalidKeyId": "",
+      "ParseError": "",
+      "RecoverError": "",
+      "HSMError": "",
+      "EnvironmentVariablePrivateKeyNotSet": "",
+      "HexDecodeFailed": "",
+      "EnvironmentVariableHexDecodeFailed": "",
+      "EnvironmentVariableInvalidSeed": ""
+    }
+  },
+  "Decimals": "u8",
+  "EncodedNotice": "Vec<u8>",
+  "EraId": "u32",
+  "EraIndex": "u32",
+  "EthereumBlock": {
+    "hash": "EthereumHash",
+    "parent_hash": "EthereumHash",
+    "number": "EthereumBlockNumber",
+    "events": "Vec<EthereumEvent>"
+  },
+  "EthereumBlockNumber": "u64",
+  "EthereumClientError": {
+    "_enum": {
+      "DecodeError": "",
+      "HttpIoError": "",
+      "HttpTimeout": "",
+      "HttpErrorCode": "u16",
+      "InvalidUTF8": "",
+      "JsonParseError": "",
+      "NoResult": ""
+    }
+  },
+  "EthereumEvent": {
+    "_enum": {
+      "Lock": "EthereumEventLock",
+      "LockCash": "EthereumEventLockCash",
+      "ExecTrxRequest": "EthereumEventExecTrxRequest",
+      "ExecuteProposal": "EthereumEventExecuteProposal",
+      "NoticeInvoked": "EthereumEventNoticeInvoked"
+    }
+  },
+  "EthereumEventExecTrxRequest": {
+    "account": "[u8; 20]",
+    "trx_request": "String"
+  },
+  "EthereumEventExecuteProposal": {
+    "title": "String",
+    "extrinsics": "Vec<Vec<u8>>"
+  },
+  "EthereumEventLock": {
+    "asset": "[u8; 20]",
+    "sender": "[u8; 20]",
+    "chain": "String",
+    "recipient": "[u8; 32]",
+    "amount": "u128"
+  },
+  "EthereumEventLockCash": {
+    "sender": "[u8; 20]",
+    "chain": "String",
+    "recipient": "[u8; 32]",
+    "amount": "u128",
+    "principal": "u128"
+  },
+  "EthereumEventNoticeInvoked": {
+    "era_id": "u32",
+    "era_index": "u32",
+    "notice_hash": "[u8; 32]",
+    "result": "Vec<u8>"
+  },
+  "EthereumHash": "[u8; 32]",
+  "Ethereum__Chain__Address": "[u8; 20]",
+  "Ethereum__Chain__Amount": "u128",
+  "Ethereum__Chain__Block": "EthereumBlock",
+  "Ethereum__Chain__CashIndex": "u128",
+  "Ethereum__Chain__Event": "EthereumEvent",
+  "Ethereum__Chain__Hash": "[u8; 32]",
+  "Ethereum__Chain__PublicKey": "[u8; 64]",
+  "Ethereum__Chain__Rate": "u128",
+  "Ethereum__Chain__Signature": "[u8; 65]",
+  "Ethereum__Chain__Timestamp": "u64",
+  "EventError": {
+    "_enum": {
+      "NoRpcUrl": "",
+      "NoStarportAddress": "",
+      "EthereumClientError": "EthereumClientError",
+      "ErrorDecodingHex": "",
+      "PolygonClientError": "EthereumClientError",
+      "ActionNotSupported": ""
+    }
+  },
+  "ExtractionNotice": {
+    "_enum": {
+      "Eth": "ExtractionNoticeEth",
+      "Matic": "ExtractionNoticeMatic"
+    }
+  },
+  "ExtractionNoticeEth": {
+    "id": "NoticeId",
+    "parent": "Ethereum__Chain__Hash",
+    "asset": "Ethereum__Chain__Address",
+    "account": "Ethereum__Chain__Address",
+    "amount": "Ethereum__Chain__Amount"
+  },
+  "ExtractionNoticeMatic": {
+    "id": "NoticeId",
+    "parent": "Polygon__Chain__Hash",
+    "asset": "Polygon__Chain__Address",
+    "account": "Polygon__Chain__Address",
+    "amount": "Polygon__Chain__Amount"
+  },
+  "Factor": "Uint",
+  "FutureYieldNotice": {
+    "_enum": {
+      "Eth": "FutureYieldNoticeEth",
+      "Matic": "FutureYieldNoticeMatic"
+    }
+  },
+  "FutureYieldNoticeEth": {
+    "id": "NoticeId",
+    "parent": "Ethereum__Chain__Hash",
+    "next_cash_yield": "Ethereum__Chain__Rate",
+    "next_cash_index": "Ethereum__Chain__CashIndex",
+    "next_cash_yield_start": "Ethereum__Chain__Timestamp"
+  },
+  "FutureYieldNoticeMatic": {
+    "id": "NoticeId",
+    "parent": "Polygon__Chain__Hash",
+    "next_cash_yield": "Polygon__Chain__Rate",
+    "next_cash_index": "Polygon__Chain__CashIndex",
+    "next_cash_yield_start": "Polygon__Chain__Timestamp"
+  },
+  "Gateway__Chain__Address": "[u8; 32]",
+  "Gateway__Chain__Amount": "u128",
+  "Gateway__Chain__Block": "()",
+  "Gateway__Chain__CashIndex": "u128",
+  "Gateway__Chain__Event": "()",
+  "Gateway__Chain__Hash": "[u8; 32]",
+  "Gateway__Chain__PublicKey": "[u8; 64]",
+  "Gateway__Chain__Rate": "u128",
+  "Gateway__Chain__Signature": "[u8; 65]",
+  "Gateway__Chain__Timestamp": "u64",
+  "GovernanceResult": {
+    "_enum": {
+      "FailedToDecodeCall": "",
+      "DispatchSuccess": "",
+      "DispatchFailure": "DispatchError"
+    }
+  },
+  "Int": "i128",
+  "InterestRateModel": {
+    "_enum": {
+      "Kink": "InterestRateModelKink",
+      "Fixed": "InterestRateModelFixed"
+    }
+  },
+  "InterestRateModelFixed": {
+    "rate": "APR"
+  },
+  "InterestRateModelKink": {
+    "zero_rate": "APR",
+    "kink_rate": "APR",
+    "kink_utilization": "Factor",
+    "full_rate": "APR"
+  },
+  "Keys": "SessionKeys",
+  "LiquidityFactor": "Factor",
+  "LookupSource": "MultiAddress",
+  "MathError": {
+    "_enum": {
+      "AbnormalFloatingPointResult": "",
+      "DivisionByZero": "",
+      "Overflow": "",
+      "Underflow": "",
+      "SignMismatch": "",
+      "PriceNotUSD": "",
+      "UnitsMismatch": ""
+    }
+  },
+  "MinerShares": "Factor",
+  "Nonce": "u32",
+  "Notice": {
+    "_enum": {
+      "ExtractionNotice": "ExtractionNotice",
+      "CashExtractionNotice": "CashExtractionNotice",
+      "FutureYieldNotice": "FutureYieldNotice",
+      "SetSupplyCapNotice": "SetSupplyCapNotice",
+      "ChangeAuthorityNotice": "ChangeAuthorityNotice"
+    }
+  },
+  "NoticeId": "(EraId,EraIndex)",
+  "NoticeState": {
+    "_enum": {
+      "Missing": "",
+      "Pending": "NoticeStatePending",
+      "Executed": ""
+    }
+  },
+  "NoticeStatePending": {
+    "signature_pairs": "ChainSignatureList"
+  },
+  "OracleError": {
+    "_enum": {
+      "BadTicker": "",
+      "CryptoError": "",
+      "EthAbiParseError": "",
+      "HexParseError": "",
+      "HttpError": "",
+      "InvalidApiEndpoint": "",
+      "InvalidKind": "",
+      "InvalidReporter": "",
+      "InvalidSymbol": "",
+      "InvalidTicker": "",
+      "InvalidTimestamp": "",
+      "JsonParseError": "",
+      "NoPriceFeedURL": "",
+      "StalePrice": "",
+      "SubmitError": "",
+      "NoPrice": ""
+    }
+  },
+  "Oracle__Timestamp": "u64",
+  "PerDispatchClass_u32": {
+    "normal": "u32",
+    "operational": "u32",
+    "mandatory": "u32"
+  },
+  "Polkadot__Chain__Address": "[u8; 32]",
+  "Polkadot__Chain__Amount": "u128",
+  "Polkadot__Chain__Block": "()",
+  "Polkadot__Chain__CashIndex": "u128",
+  "Polkadot__Chain__Event": "()",
+  "Polkadot__Chain__Hash": "[u8; 32]",
+  "Polkadot__Chain__PublicKey": "[u8; 64]",
+  "Polkadot__Chain__Rate": "u128",
+  "Polkadot__Chain__Signature": "[u8; 65]",
+  "Polkadot__Chain__Timestamp": "u64",
+  "Polygon__Chain__Address": "[u8; 20]",
+  "Polygon__Chain__Amount": "u128",
+  "Polygon__Chain__Block": "EthereumBlock",
+  "Polygon__Chain__CashIndex": "u128",
+  "Polygon__Chain__Event": "EthereumEvent",
+  "Polygon__Chain__Hash": "[u8; 32]",
+  "Polygon__Chain__PublicKey": "[u8; 64]",
+  "Polygon__Chain__Rate": "u128",
+  "Polygon__Chain__Signature": "[u8; 65]",
+  "Polygon__Chain__Timestamp": "u64",
+  "Portfolio": {
+    "cash": "Balance",
+    "positions": "Vec<(AssetInfo,Balance)>"
+  },
+  "Price": {
+    "ticker": "Ticker",
+    "value": "AssetPrice"
+  },
+  "Quantity": {
+    "value": "AssetAmount",
+    "units": "Units"
+  },
+  "RatesError": {
+    "_enum": {
+      "ModelRateOutOfBounds": "",
+      "ZeroAboveKink": "",
+      "KinkAboveFull": "",
+      "KinkUtilizationTooHigh": "",
+      "Overflowed": ""
+    }
+  },
+  "Reason": {
+    "_enum": {
+      "AssetNotSupported": "",
+      "BadAccount": "",
+      "BadAddress": "",
+      "BadAsset": "",
+      "BadChainId": "",
+      "BadFactor": "",
+      "BadHash": "",
+      "BadSymbol": "",
+      "BadTicker": "",
+      "BadUnits": "",
+      "ChainMismatch": "",
+      "HashMismatch": "",
+      "CryptoError": "CryptoError",
+      "EventError": "EventError",
+      "FailedToSubmitExtrinsic": "",
+      "CannotFormulateReorg": "",
+      "WorkerFetchError": "",
+      "WorkerBusy": "",
+      "IncorrectNonce": "ReasonIncorrectNonce",
+      "InKindLiquidation": "",
+      "InsufficientChainCash": "",
+      "InsufficientLiquidity": "",
+      "InsufficientTotalFunds": "",
+      "InvalidAPR": "",
+      "InvalidCodeHash": "",
+      "InvalidLiquidation": "",
+      "InvalidUTF8": "",
+      "KeyNotFound": "",
+      "MathError": "MathError",
+      "MaxForNonCashAsset": "",
+      "MinTxValueNotMet": "",
+      "None": "",
+      "NoPrice": "",
+      "NoSuchAsset": "",
+      "NoticeMissing": "ReasonNoticeMissing",
+      "NotImplemented": "",
+      "OracleError": "OracleError",
+      "RatesError": "RatesError",
+      "RepayTooMuch": "",
+      "SelfTransfer": "",
+      "SerdeError": "",
+      "SetYieldNextError": "SetYieldNextError",
+      "SignatureAccountMismatch": "",
+      "SignatureMismatch": "",
+      "TimestampMissing": "",
+      "TimeTravelNotAllowed": "",
+      "TrxRequestParseError": "TrxReqParseError",
+      "UnknownValidator": "",
+      "InvalidChain": "",
+      "PendingAuthNotice": "",
+      "ChangeValidatorsError": "",
+      "InsufficientCashForMaxTransfer": "",
+      "SufficientLiquidity": "",
+      "AssetQuantityMismatch": "",
+      "Unreachable": "",
+      "TotalBorrowUnderflow": "",
+      "InsufficientCollateral": "",
+      "NegativeChainCash": "",
+      "MissingLastBlock": "",
+      "StarportMissing": "",
+      "InvalidChainBlock": ""
+    }
+  },
+  "ReasonIncorrectNonce": "(Nonce,Nonce)",
+  "ReasonNoticeMissing": "(ChainId,NoticeId)",
+  "Reporter": "[u8; 20]",
+  "ReporterSet": "Vec<Reporter>",
+  "Reserved": "()",
+  "SessionIndex": "u32",
+  "SessionKeys": {
+    "aura": "[u8;32]",
+    "grandpa": "[u8;32]"
+  },
+  "SetSupplyCapNotice": {
+    "_enum": {
+      "Eth": "SetSupplyCapNoticeEth",
+      "Matic": "SetSupplyCapNoticeMatic"
+    }
+  },
+  "SetSupplyCapNoticeEth": {
+    "id": "NoticeId",
+    "parent": "Ethereum__Chain__Hash",
+    "asset": "Ethereum__Chain__Address",
+    "cap": "Ethereum__Chain__Amount"
+  },
+  "SetSupplyCapNoticeMatic": {
+    "id": "NoticeId",
+    "parent": "Polygon__Chain__Hash",
+    "asset": "Polygon__Chain__Address",
+    "cap": "Polygon__Chain__Amount"
+  },
+  "SetYieldNextError": {
+    "_enum": {
+      "NotEnoughTimeToSyncBeforeNext": "",
+      "NotEnoughTimeToSyncBeforeCancel": ""
+    }
+  },
+  "SignedPayload": "Vec<u8>",
+  "SignersSet": "BTreeSet<ValidatorIdentity>",
+  "SubstrateId": "AccountId32",
+  "Symbol": "[u8; 12]",
+  "Ticker": "[u8; 12]",
+  "Timestamp": "u64",
+  "TrxReqParseError": {
+    "_enum": {
+      "NotImplemented": "",
+      "LexError": "",
+      "InvalidAmount": "",
+      "InvalidAddress": "",
+      "InvalidArgs": "",
+      "UnknownFunction": "",
+      "InvalidExpression": "",
+      "InvalidChain": "",
+      "InvalidChainAccount": ""
+    }
+  },
+  "USDQuantity": "Quantity",
+  "Uint": "u128",
+  "Units": {
+    "ticker": "Ticker",
+    "decimals": "Decimals"
+  },
+  "ValidatorIdentity": "SubstrateId",
+  "ValidatorKeys": {
+    "substrate_id": "SubstrateId",
+    "eth_address": "Ethereum__Chain__Address"
+  },
+  "VersionedAuthorityList": {
+    "version": "u8",
+    "authorityList": "AuthorityList"
+  }
+}

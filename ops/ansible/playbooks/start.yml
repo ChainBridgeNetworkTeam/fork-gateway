@@ -1,0 +1,10 @@
+
+- hosts:
+    - full_node
+    - authority_node
+  tasks:
+    - name: start gateway service
+      become: true
+      systemd:
+        name: gateway.service
+        state: started

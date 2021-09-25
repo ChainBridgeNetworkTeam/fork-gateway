@@ -1,0 +1,10 @@
+
+- hosts:
+    - full_node
+    - authority_node
+  tasks:
+    - name: stop gateway service
+      become: true
+      systemd:
+        name: gateway.service
+        state: stopped

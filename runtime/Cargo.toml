@@ -1,0 +1,96 @@
+[package]
+authors = ['Compound <https://compound.finance>']
+edition = '2018'
+homepage = 'https://compound.cash'
+name = 'gateway-runtime'
+repository = 'https://github.com/compound-finance/gateway/'
+version = '1.0.0'
+
+[package.metadata.docs.rs]
+targets = ['x86_64-unknown-linux-gnu']
+
+[build-dependencies]
+substrate-wasm-builder = { git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+
+[dependencies]
+codec = { package = 'parity-scale-codec', version = '2.0.0' }
+hex-literal = { version = '0.3.1', optional = true }
+serde = { version = '1.0.125', features = ['derive'], optional = true }
+
+# Substrate dependencies
+frame-executive = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+frame-support = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+frame-system = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+frame-system-rpc-runtime-api = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+
+sp-api = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-block-builder = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-consensus-aura = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-core = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-inherents = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-offchain = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-runtime = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-session = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-std = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-transaction-pool = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-version = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+
+# Used only for runtime benchmarking
+frame-benchmarking = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound', optional = true }
+frame-system-benchmarking = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound', optional = true }
+
+# Other pallets
+pallet-aura = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+pallet-grandpa = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+pallet-randomness-collective-flip = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+pallet-timestamp = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+pallet-session = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+
+# Local dependencies
+pallet-cash = { path = '../pallets/cash', default-features = false }
+pallet-cash-runtime-api = { path = '../pallets/cash/runtime-api', default-features = false }
+pallet-oracle = { path = '../pallets/oracle', default-features = false }
+timestamp = { path = '../timestamp', default-features = false }
+our-std = { path = '../our-std', default-features = false }
+
+[features]
+default = ['std', 'runtime-benchmarks']
+runtime-benchmarks = [
+    'hex-literal',
+    'frame-benchmarking',
+    'frame-support/runtime-benchmarks',
+    'frame-system-benchmarking',
+    'frame-system/runtime-benchmarks',
+    'pallet-cash/runtime-benchmarks',
+    'pallet-timestamp/runtime-benchmarks',
+    'sp-runtime/runtime-benchmarks',
+]
+runtime-debug = ['our-std/runtime-debug']
+std = [
+    'codec/std',
+    'frame-executive/std',
+    'frame-support/std',
+    'frame-system-rpc-runtime-api/std',
+    'frame-system/std',
+    'pallet-aura/std',
+    'pallet-cash/std',
+    'pallet-cash-runtime-api/std',
+    'pallet-oracle/std',
+    'pallet-grandpa/std',
+    'pallet-randomness-collective-flip/std',
+    'pallet-session/std',
+    'pallet-timestamp/std',
+    'serde',
+    'sp-api/std',
+    'sp-block-builder/std',
+    'sp-consensus-aura/std',
+    'sp-core/std',
+    'sp-inherents/std',
+    'sp-offchain/std',
+    'sp-runtime/std',
+    'sp-session/std',
+    'sp-std/std',
+    'sp-transaction-pool/std',
+    'sp-version/std',
+]
+

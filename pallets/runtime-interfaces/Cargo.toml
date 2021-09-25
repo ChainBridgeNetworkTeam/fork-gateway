@@ -1,0 +1,32 @@
+[package]
+authors = ['Compound <https://compound.finance>']
+description = 'Pallet for implementing CASH runtime interfaces.'
+edition = '2018'
+homepage = 'https://compound.cash'
+name = 'runtime-interfaces'
+repository = 'https://github.com/compound-finance/gateway/'
+version = '1.0.0'
+
+[dependencies]
+codec = { package = 'parity-scale-codec', version = '2.0.0', default-features = false, features = ['derive'] }
+lazy_static = '1.4.0'
+
+frame-support = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-runtime-interface = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-externalities = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-io = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+
+ethereum-client = { path = '../../ethereum-client', default-features = false }
+gateway-crypto = { path = "../../gateway-crypto", default-features = false }
+our-std = { path = "../../our-std", default-features = false }
+
+[features]
+default = ['std']
+std = [
+    'codec/std',
+    'frame-support/std',
+    'sp-externalities/std',
+    'sp-io/std',
+    'sp-runtime-interface/std',
+    'gateway-crypto/std',
+]

@@ -1,0 +1,17 @@
+
+- hosts:
+    - full_node
+    - authority_node
+  tasks:
+    - name: stop gateway service
+      become: true
+      systemd:
+        name: gateway.service
+        state: stopped
+
+    - name: start gateway service
+      become: true
+      systemd:
+        name: gateway.service
+        state: started
+        daemon_reload: yes

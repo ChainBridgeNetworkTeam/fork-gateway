@@ -1,0 +1,26 @@
+{
+  "AccountData": "()",
+  "AccountId32": "[u8;32]",
+  "Authorities": "Vec<AccountId32>",
+  "Address": "MultiAddress",
+  "Keys": "SessionKeys",
+  "SignedPayload": "Vec<u8>",
+  "VersionedAuthorityList": {
+    "version": "u8",
+    "authorityList": "AuthorityList"
+  },
+  "LookupSource": "MultiAddress",
+  "SessionKeys": {
+    "aura": "[u8;32]",
+    "grandpa": "[u8;32]"
+  },
+  "ChainStarport": "ChainAccount",
+  "BlockLength": {
+    "max": "PerDispatchClass_u32"
+  },
+  "PerDispatchClass_u32": {
+    "normal": "u32",
+    "operational": "u32",
+    "mandatory": "u32"
+  }
+}

@@ -1,0 +1,60 @@
+
+- name: use deploy key if set
+  when: lookup('env', 'deploy_key') != ""
+  block:
+    - name: check for deploy key
+      debug:
+        msg: "'{{ lookup('env', 'deploy_key') }}' is the deploy key environment variable."
+
+    - name: add deploy key
+      copy:
+        src:  "{{ lookup('env', 'deploy_key') }}"
+        dest: '{{ git_deploy_key }}'
+        mode: '0400'
+  tags:
+    - build-chain
+
+# TODO: how to handle missing deploy key?
+- name: checkout gateway
+  git:
+    repo: '{{ git_repo }}'
+    dest: '{{ gateway_home }}'
+    version: '{{ git_branch }}'
+    key_file: '{{ git_deploy_key }}'
+    force: true
+    accept_hostkey: yes
+  tags:
+    - build-chain
+    - rebuild-chain
+
+- name: compile gateway
+  command:
+    cmd: "{{ cargo_bin }} build --release" # appropriate nightly is rustup default
+    chdir: "{{ gateway_home }}"
+  async: 3600
+  poll: 0
+  register: gateway
+  tags:
+    - build-chain
+    - rebuild-chain
+
+- name: compile gateway - check async status
+  async_status: jid={{ gateway.ansible_job_id }}
+  register: job_result
+  until: job_result.finished
+  retries: 1000
+  delay: 10
+  tags:
+    - build-chain
+    - rebuild-chain
+
+- name: change gateway bin owner to gateway
+  file:
+    path: '{{ gateway_bin }}'
+    owner: gateway
+    group: gateway
+    mode: '0744'
+    state: file
+  become: true
+  tags:
+    - build-chain

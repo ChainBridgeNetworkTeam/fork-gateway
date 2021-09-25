@@ -1,0 +1,40 @@
+
+- name: stop gateway service
+  become: true
+  systemd:
+    name: gateway.service
+    state: stopped
+
+- name: bring chain spec
+  become: true
+  ansible.builtin.copy:
+    src: "{{ chain_spec }}"
+    dest: "{{ gateway_user_home }}/chainSpec.json"
+    owner: gateway
+    mode: '0644'
+
+- name: reinstall Gateway systemd unit file (authority node)
+  template: src=gateway-authority-node.j2 dest=/etc/systemd/system/gateway.service
+  become: true
+  when: "'authority_node' in group_names"
+  vars:
+    peers: "{{ bootnodes }}"
+    authority: "{{ authority }}"
+  tags:
+    gateway-service
+
+- name: reinstall Gateway systemd unit file (full node)
+  template: src=gateway-full-node.j2 dest=/etc/systemd/system/gateway.service
+  become: true
+  when: "'full_node' in group_names"
+  vars:
+    peers: "{{ groups['authority_node'] }}"
+  tags:
+    gateway-service
+
+- name: start gateway service
+  become: true
+  systemd:
+    name: gateway.service
+    state: started
+    daemon_reload: yes

@@ -1,0 +1,21 @@
+[profile.dev]
+split-debuginfo = 'unpacked'
+
+[profile.release]
+panic = 'unwind'
+
+[workspace]
+members = [
+    'node',
+    'pallets/cash',
+    'pallets/oracle',
+    'pallets/runtime-interfaces',
+    'runtime',
+    'our-std',
+    'gateway-crypto',
+    'ethereum-client',
+    'test-utils/open-oracle-mock-reporter',
+    'trx-request',
+    'types-derive',
+    'timestamp'
+]

@@ -1,0 +1,29 @@
+[package]
+authors = ["Compound <https://compound.finance>"]
+description = "Things we use from std, in pallets."
+edition = "2018"
+homepage = "https://compound.cash"
+name = "our-std"
+repository = "https://github.com/compound-finance/gateway/"
+version = "0.0.1"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+hex = { version = '0.4.2', features = ['alloc'], default-features = false }
+log = { version = '0.4.14' }
+serde = { version = "1.0.125", features = ["derive"] }
+sp-runtime = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+sp-std = { default-features = false, git = 'https://github.com/compound-finance/substrate', branch = 'jflatow/compound' }
+
+our-std-proc-macro = { path = "./proc-macro" }
+
+[features]
+default = ["std"]
+std = [
+    "serde/std",
+    "sp-runtime/std",
+    "sp-std/std",
+]
+runtime-debug = []

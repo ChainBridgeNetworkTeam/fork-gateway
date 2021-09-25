@@ -1,0 +1,25 @@
+[Unit]
+Description=Gateway Full Node
+
+[Service]
+User=gateway
+Group=gateway
+WorkingDirectory={{ gateway_user_home }}
+Environment="MINER={{ miner }}"
+ExecStart={{ gateway_bin }} \
+  --base-path {{ chain_data_dir }} \
+  --chain {{ gateway_chain_spec_raw }} \
+  --port 30333 \
+  --ws-port 9944 \
+  --ws-external \
+  --no-mdns  \
+  --rpc-port 9933 \
+  --rpc-external \
+  --node-key-file {{ node_key_priv_file }} \
+  {% for peer in peers -%}
+  --reserved-nodes /ip4/{{ peer }}/tcp/30333/p2p/{{ hostvars[peer].ansible_local.substrate.gateway.public_key }} \
+  {% endfor -%}
+  --reserved-only \
+  --pruning archive \
+  --ws-max-connections 1000 \
+  --rpc-cors=all

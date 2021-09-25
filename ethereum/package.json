@@ -1,0 +1,26 @@
+{
+  "name": "gateway-ethereum-starport",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@ethersproject/wallet": "^5.0.9",
+    "eth-saddle": "^0.1.23"
+  },
+  "scripts": {
+    "postinstall": "cd node_modules/solidity-parser-antlr && yarn install && yarn build",
+    "compile": "npx saddle compile",
+    "test": "npx saddle compile && npx saddle test",
+    "coverage": "BUILD_FILE=.build/contracts-trace.json npx saddle compile --trace && BUILD_FILE=.build/contracts-trace.json npx saddle coverage && npx istanbul report --root=./coverage lcov json",
+    "console": "NODE_OPTIONS='--experimental-repl-await' npx saddle console",
+    "script": "npx saddle script"
+  },
+  "resolutions": {
+    "solidity-parser-antlr": "https://github.com/solidity-parser/parser.git",
+    "ganache-core": "=2.13.2"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "istanbul": "^0.4.5"
+  }
+}
